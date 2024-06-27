@@ -16,6 +16,8 @@ const config: Config = {
         backgroundDark: "#1e1e1e",
         fontColorGray: "#bfbebd",
       }
+    }, backgroundImage: {
+      "logo": "url('/images/logo.svg')",
     },
   },
   plugins: [],
