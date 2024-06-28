@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material";
 import theme from "./theme";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
+import MenuSlider from "@/components/NavBar/MenuSlider/MenuSlider";
 
 export const metadata: Metadata = {
   title: "Habitat",
