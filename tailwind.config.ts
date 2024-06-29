@@ -19,6 +19,7 @@ const config: Config = {
     }, backgroundImage: {
       "logo": "url('/images/logo.svg')",
       "menuImg": "url('/images/menuImg.png')",
+      "hero": "url('/images/hero.jpg')",
     },
   },
   plugins: [],

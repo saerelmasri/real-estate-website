@@ -59,12 +59,12 @@ function NavBar() {
   return (
     <>
       <nav
-        className={`bg-[#eee9e6] w-full p-3 ${
+        className={` w-full p-3 ${
           menuOpen === true ? "bg-black" : ""
-        } bg-transparen`}
-        style={{ zIndex: 1100, position: "relative" }}
+        }`}
+        style={{ zIndex: 1100, position: "absolute", top: 0, left: 0, right: 0 }}
       >
-        <div className="flex items-center justify-between t pt-3">
+        <div className="flex items-center justify-between bg-transparent pt-3">
           <Box className={"flex justify-center items-center ml-[10%]"}>
             <Typography
               variant="h2"
@@ -142,14 +142,15 @@ function NavBar() {
         className={clsx("menu", { "menu-open": menuOpen })}
         sx={{
           position: "fixed",
+          top: "60px", // Adjust the top position to position below the navbar
           left: 0,
           right: 0,
-          height: "calc(100vh - 100px)", // Full viewport height minus navbar height
-          backgroundColor: "black",
+          height: "calc(100vh - 60px)", // Full viewport height minus navbar height
+          backgroundColor: menuOpen ? "black" : "transparent",
           transition: "transform 0.5s",
           transform: menuOpen ? "translateY(0)" : "translateY(-100%)",
           zIndex: 1000, // Ensure it's behind the navbar
-          overflowY: "auto", // Add scroll if content exceeds height
+          overflowY: menuOpen ? "auto" : "hidden", // Add scroll if content exceeds height
         }}
       >
         <Box
@@ -161,6 +162,7 @@ function NavBar() {
             height: "100%", // Full height
             opacity: menuOpen ? 1 : 0,
             transition: "opacity 0.5s 0.5s",
+            overflow: "hidden"
           }}
         >
           <Box
@@ -217,9 +219,15 @@ function NavBar() {
             />
           </Box>
         </Box>
-        <Box className={"w-full flex items-center justify-between pl-[10%] pr-[10%] pb-9"}>
-          <Typography className={"text-sm font-bold"} color={"primary"}>© Habitat — All rights reserved</Typography>
-          <Typography className={"text-xs font-bold"} color={"primary"}>Made By Saer El Masri</Typography>
+        <Box
+          className={"w-full flex items-center justify-between pl-[10%] pr-[10%] pb-9"}
+        >
+          <Typography className={"text-sm font-bold"} color={"primary"}>
+            © Habitat — All rights reserved
+          </Typography>
+          <Typography className={"text-xs font-bold"} color={"primary"}>
+            Made By Saer El Masri
+          </Typography>
         </Box>
       </Box>
     </>
