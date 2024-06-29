@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        satoshi: ['Satoshi', 'sans-serif'],
+        'satoshi-regular': ['Satoshi-Regular', 'sans-serif'],
+        'satoshi-medium': ['Satoshi-Medium', 'sans-serif'],
       },
       colors: {
         backgroundLight: "#F7F5F4",

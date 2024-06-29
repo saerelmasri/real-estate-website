@@ -4,31 +4,16 @@ import { Typography } from "@mui/material";
 import React from "react";
 import Divider from "@mui/material/Divider";
 import Marquee from "react-fast-marquee";
+import Name from "@/components/Home/Name";
+import NewHousesListing from "@/components/Home/NewHousesListing";
+import AboutSection from "@/components/Home/AboutSection";
+import QASection from "@/components/Home/QASection";
 
 function Home() {
   return (
     <div>
       <div className="bg-hero bg-cover bg-center bg-no-repeat bg-opacity-25 w-full h-[200vh] flex flex-col">
-        <div className="w-full h-[100vh] mt-[100px] flex flex-col justify-center items-center">
-          <Typography
-            sx={{
-              fontSize: "15px",
-              fontWeight: "500",
-              textTransform: "uppercase",
-            }}
-          >
-            REALISTICA / WHERE YOU FILL SAFE
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: "200px",
-              fontWeight: "semibold",
-              textTransform: "uppercase",
-            }}
-          >
-            Habitat
-          </Typography>
-        </div>
+        <Name />
         <div className=" w-full h-[150vh] mt-[100px] flex flex-col justify-end items-center pl-[30%] pr-[30%] pb-10">
           <Typography
             sx={{ fontSize: "25px", fontWeight: "500", textAlign: "center" }}
@@ -43,9 +28,9 @@ function Home() {
       <div
         className={"w-full h-[70vh] bg-[#f7f5f4] flex flex-col items-center"}
       >
-        <div className={" w-full h-[25%] flex items-center pl-[5%]"}>
+        <div className={" w-full h-[25%] flex items-center pl-[12%]"}>
           <Typography
-            variant="h6"
+            variant="body2"
             sx={{
               fontWeight: "900",
               color: "black",
@@ -89,32 +74,34 @@ function Home() {
         <Divider sx={{ opacity: 0.8, width: "80%" }} />
         <div className={"h-[25%]"} />
       </div>
-      <div className={"w-full bg-[#f7f5f4] flex flex-col items-center"}>
-        <div className={" w-full flex flex-col pl-[5%]"}>
+      <NewHousesListing />
+      <AboutSection />
+      <div className="w-full h-[100vh] bg-[#f7f5f4] flex flex-col items-center">
+        <div className="w-full flex flex-col pl-[12%] h-[20%]">
           <Typography
-            variant="h6"
+            variant="body2"
             sx={{
               fontWeight: "900",
               color: "black",
               textTransform: "uppercase",
             }}
           >
-            YOU ARE LOOKING FOR
+            Find Answers To You
           </Typography>
-          <Typography
-            sx={{
-              fontSize: "120px",
-              fontWeight: "500",
-              color: "black",
-            }}
-          >
-            New Houses
-          </Typography>
+          <div style={{ overflow: "hidden", height: "150px" }}>
+            <Typography
+              sx={{
+                fontWeight: "500",
+                color: "black",
+              }}
+              className={"text-9xl"}
+            >
+              Questions
+            </Typography>
+          </div>
         </div>
-        <Divider sx={{ opacity: 0.8, width: "80%" }} />
-        <div className={" w-full h-[80vh] border mt-10"}>
-
-        </div>
+        <Divider sx={{ opacity: 0.8, width: "80%", marginTop: 5 }} />
+        <QASection />
       </div>
     </div>
   );
