@@ -21,6 +21,7 @@ const config: Config = {
       "logo": "url('/images/logo.svg')",
       "menuImg": "url('/images/menuImg.png')",
       "hero": "url('/images/hero.jpg')",
+      "hero2": "url('/images/prop2.jpg')",
     },
   },
   plugins: [],

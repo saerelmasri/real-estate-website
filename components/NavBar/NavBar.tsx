@@ -23,6 +23,9 @@ const AnimatedIconButton = styled(IconButton)(({ theme }) => ({
   overflow: "hidden",
   color: "white",
   background: "black",
+  [theme.breakpoints.down("lg")]: {
+    display: "none", // set to inline-flex for lg and larger
+  },
   "& .MuiSvgIcon-root": {
     position: "relative",
     zIndex: 1,
@@ -59,10 +62,14 @@ function NavBar() {
   return (
     <>
       <nav
-        className={` w-full p-3 ${
-          menuOpen === true ? "bg-black" : ""
-        }`}
-        style={{ zIndex: 1100, position: "absolute", top: 0, left: 0, right: 0 }}
+        className={` w-full p-3 ${menuOpen === true ? "bg-black" : ""}`}
+        style={{
+          zIndex: 1100,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+        }}
       >
         <div className="flex items-center justify-between bg-transparent pt-3">
           <Box className={"flex justify-center items-center ml-[10%]"}>
@@ -76,9 +83,9 @@ function NavBar() {
           </Box>
           <Box
             className={"flex justify-center items-center w-[40%]"}
-            sx={{ display: "inline-flex", padding: "8px", gap: "8px" }}
+            sx={{ padding: "8px", gap: "8px" }}
           >
-            <Button variant="text">
+            <Button variant="text" className="hidden xl:inline-block">
               <Typography
                 fontWeight={900}
                 className="text-base"
@@ -87,9 +94,15 @@ function NavBar() {
                 +0 (323) 4209-23-85
               </Typography>
             </Button>
-            <Box className={"flex w-[60%] justify-center items-center gap-5"}>
+            <Box className={"flex w-[60%] justify-center items-center gap-5 "}>
               {menuOpen ? (
-                <IconButton sx={{ color: "black", background: "white" }}>
+                <IconButton
+                  sx={{
+                    color: "black",
+                    background: "white",
+                    display: { xs: "none", md: "none", lg: "inline-flex" },
+                  }}
+                >
                   <FavoriteBorderIcon />
                 </IconButton>
               ) : (
@@ -108,6 +121,7 @@ function NavBar() {
                   textTransform: "none",
                   backgroundColor: `${menuOpen === true ? "white" : "black"}`,
                 }}
+                className="hidden xl:inline-block"
               >
                 <Marquee autoFill speed={35}>
                   <Typography
@@ -151,6 +165,7 @@ function NavBar() {
           transform: menuOpen ? "translateY(0)" : "translateY(-100%)",
           zIndex: 1000, // Ensure it's behind the navbar
           overflowY: menuOpen ? "auto" : "hidden", // Add scroll if content exceeds height
+          display: menuOpen ? "hidden" : "",
         }}
       >
         <Box
@@ -162,11 +177,11 @@ function NavBar() {
             height: "100%", // Full height
             opacity: menuOpen ? 1 : 0,
             transition: "opacity 0.5s 0.5s",
-            overflow: "hidden"
+            overflow: "hidden",
           }}
         >
           <Box
-            className="menu-buttons"
+            className="menu-buttons w-[100%] sm:w-[50%]"
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -177,12 +192,13 @@ function NavBar() {
               paddingLeft: "10%",
               transform: menuOpen ? "translateX(0)" : "translateX(-50px)",
               transition: "transform 0.5s 0.5s",
+              textAlign: "left",
             }}
           >
             {buttons.map((item, key) => (
               <Button variant="text" key={key}>
                 <Typography
-                  className="text-6xl"
+                  className="text-6xl md:text-4xl lg:text-5xl xl:text-6xl text-left"
                   sx={{
                     color: `white`,
                     "&:hover": {
@@ -196,7 +212,7 @@ function NavBar() {
             ))}
           </Box>
           <Box
-            className="menu-image"
+            className="menu-image hidden md:flex md:h-[100%] "
             sx={{
               transform: menuOpen ? "scale(1)" : "scale(0)",
               transition: "transform 0.5s 0.5s",
@@ -220,7 +236,9 @@ function NavBar() {
           </Box>
         </Box>
         <Box
-          className={"w-full flex items-center justify-between pl-[10%] pr-[10%] pb-9"}
+          className={
+            "w-full items-center justify-between pl-[10%] pr-[10%] pb-9 hidden lg:flex"
+          }
         >
           <Typography className={"text-sm font-bold"} color={"primary"}>
             © Habitat — All rights reserved

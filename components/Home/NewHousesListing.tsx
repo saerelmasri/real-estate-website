@@ -75,34 +75,33 @@ function NewHousesListing() {
             >
               YOU ARE LOOKING FOR
             </Typography>
-            <div style={{ overflow: "hidden", height: "150px" }}>
+            <div style={{ overflow: "hidden" }}>
               <Typography
                 sx={{
-                  fontSize: "120px",
                   fontWeight: "500",
                   color: "black",
                   animation: `${slideUpFromBehind} 1s ease-out`,
                   animationDelay: "0.3s", // Adds a slight delay for a staggered effect
                 }}
+                className="text-7xl md:text-9xl"
               >
                 New Houses
               </Typography>
             </div>
           </div>
           <Divider sx={{ opacity: 0.8, width: "80%", marginTop: 5 }} />
-          <Box className="w-full mt-5">
+          <Box className="w-full">
             <Grid
               container
               spacing={2}
-              direction="row"
+              direction="column"
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "60vh",
+                paddingTop: 10,
+                paddingBottom: 10,
                 animation: `${slideInFromBottom} 1.2s ease-out`,
                 opacity: 1,
               }}
+              className="flex-col justify-center items-start pl-[10%] pr-[10%] lg:flex-row md:items-center lg:pl-0 lg:pr-0"
             >
               <Grid item xs={3}>
                 <PropertyCard

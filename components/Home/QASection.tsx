@@ -26,7 +26,7 @@ function QASection() {
     }
   };
   return (
-    <Box className="w-full mt-5 border pl-[12%] pr-[12%] h-[90%]">
+    <Box className="w-full mt-5 pl-[12%] pr-[12%]">
       <Accordion
         sx={{
           border: "none",
@@ -54,7 +54,7 @@ function QASection() {
               fontWeight: "500",
               color: isOpen1 ? "black" : "#ADACAC",
             }}
-            className="text-6xl"
+            className="text-4xl md:text-6xl"
           >
             01 &nbsp;How can I start the home buying process?
           </Typography>
@@ -65,8 +65,8 @@ function QASection() {
             width: "100%",
           }}
         >
-          <Box className={"w-[80%] "} />
-          <Box className={"w-[70%] flex flex-col items-start"}>
+          <Box className={"hidden md:w-[80%] "} />
+          <Box className={"w-full md:w-[70%] flex flex-col items-start"}>
             <Typography
               sx={{
                 fontWeight: "500",
@@ -121,7 +121,7 @@ function QASection() {
               fontWeight: "500",
               color: isOpen2 ? "black" : "#ADACAC",
             }}
-            className="text-6xl"
+            className="text-4xl md:text-6xl"
           >
             02 &nbsp;What should I consider when selling my home?
           </Typography>
@@ -132,8 +132,8 @@ function QASection() {
             width: "100%",
           }}
         >
-          <Box className={"w-[80%] "} />
-          <Box className={"w-[70%] flex flex-col items-start"}>
+          <Box className={"hidden md:w-[80%] "} />
+          <Box className={"w-full md:w-[70%] flex flex-col items-start"}>
             <Typography
               sx={{
                 fontWeight: "500",
@@ -189,7 +189,7 @@ function QASection() {
               fontWeight: "500",
               color: isOpen3 ? "black" : "#ADACAC",
             }}
-            className="text-6xl"
+            className="text-4xl md:text-6xl"
           >
             03 &nbsp;What properties does <strong>Habitat</strong> specialize
             in?
@@ -201,8 +201,8 @@ function QASection() {
             width: "100%",
           }}
         >
-          <Box className={"w-[80%] "} />
-          <Box className={"w-[70%] flex flex-col items-start"}>
+          <Box className={"hidden md:w-[80%] "} />
+          <Box className={"w-full md:w-[70%] flex flex-col items-start"}>
             <Typography
               sx={{
                 fontWeight: "500",

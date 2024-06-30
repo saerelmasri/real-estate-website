@@ -98,8 +98,8 @@ function AboutSection() {
   }, []);
 
   return (
-    <div className="w-full h-[100vh] bg-[#f7f5f4] pb-10">
-      <div className="flex items-center justify-between pl-[12%] pr-[12%] h-[5%]">
+    <div className="w-full bg-[#f7f5f4] pb-10">
+      <div className="flex items-center justify-between pl-[10%] pr-[10%] h-[5%]">
         <Typography
           ref={textRef}
           variant="body2"
@@ -132,10 +132,10 @@ function AboutSection() {
           <ArrowRightAltIcon sx={{ color: "black", cursor: "pointer" }} />
         </div>
       </div>
-      <div className="flex h-[95%]">
+      <div className="flex flex-col lg:flex-row">
         <div
           ref={imageRef}
-          className="w-1/2 flex justify-center items-center pl-10"
+          className="w-full lg:w-1/2 flex justify-start items-center sm:pl-[10%] mt-5"
           style={{
             animation: isVisibleImage
               ? `${slideInFromLeft} 1s ease-out`
@@ -145,18 +145,15 @@ function AboutSection() {
           <img
             src="/images/living.jpg"
             alt="Menu Image"
-            style={{
-              width: "60%",
-              height: "80%",
-            }}
+            className="w-[80%] h-[50%] lg:h-[80%] xl:w-[70%]"
           />
         </div>
-        <div className="w-1/2 flex items-start">
+        <div className="w-full lg:w-1/2 flex mt-5 md:mt-0 sm:pl-[10%]">
           <Typography
             ref={paragraphRef}
             color={"black"}
             className={
-              "font-satoshi-medium font-medium text-3xl pr-[25%]  mt-16 leading-normal"
+              "font-satoshi-medium font-medium text-3xl pr-[25%] mt-16 leading-normal"
             }
             style={{
               animation: isVisibleParagraph

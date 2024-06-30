@@ -29,11 +29,11 @@ function Name() {
       </Typography>
       <Typography
         sx={{
-          fontSize: "200px",
           fontWeight: "semibold",
           textTransform: "uppercase",
           animation: `${slideInFromBottom} 1.5s ease-out`,
         }}
+        className="text-9xl md:text-[200px]"
       >
         Habitat
       </Typography>

@@ -8,15 +8,17 @@ import Name from "@/components/Home/Name";
 import NewHousesListing from "@/components/Home/NewHousesListing";
 import AboutSection from "@/components/Home/AboutSection";
 import QASection from "@/components/Home/QASection";
+import DiscoverSection from "@/components/Home/DiscoverSection";
 
 function Home() {
   return (
     <div>
-      <div className="bg-hero bg-cover bg-center bg-no-repeat bg-opacity-25 w-full h-[200vh] flex flex-col">
+      <div className="bg-hero bg-cover bg-center bg-no-repeat bg-opacity-25 w-full h-[100vh] md:h-[200vh] flex flex-col">
         <Name />
-        <div className=" w-full h-[150vh] mt-[100px] flex flex-col justify-end items-center pl-[30%] pr-[30%] pb-10">
+        <div className=" w-full h-[150vh] mt-[100px] flex flex-col justify-end items-center pl-[5%] pr-[5%] lg:pl-[30%] lg:pr-[30%] pb-10">
           <Typography
-            sx={{ fontSize: "25px", fontWeight: "500", textAlign: "center" }}
+            sx={{ fontWeight: "500", textAlign: "center" }}
+            className="text-2xl md:text-3xl"
           >
             Whether you're looking for a charming apartment or a roomy family
             home, we know how crucial location is. We're dedicated to finding
@@ -76,7 +78,7 @@ function Home() {
       </div>
       <NewHousesListing />
       <AboutSection />
-      <div className="w-full h-[100vh] bg-[#f7f5f4] flex flex-col items-center">
+      <div className="w-full  bg-[#f7f5f4] flex flex-col items-center pt-10 pb-10">
         <div className="w-full flex flex-col pl-[12%] h-[20%]">
           <Typography
             variant="body2"
@@ -88,13 +90,13 @@ function Home() {
           >
             Find Answers To You
           </Typography>
-          <div style={{ overflow: "hidden", height: "150px" }}>
+          <div style={{ overflow: "hidden" }}>
             <Typography
               sx={{
                 fontWeight: "500",
                 color: "black",
               }}
-              className={"text-9xl"}
+              className={"text-7xl md:text-9xl"}
             >
               Questions
             </Typography>
@@ -102,6 +104,38 @@ function Home() {
         </div>
         <Divider sx={{ opacity: 0.8, width: "80%", marginTop: 5 }} />
         <QASection />
+      </div>
+      <DiscoverSection
+        imageUrl="bg-hero2"
+        projectName="BORG 15"
+        projectDescription="4 BEDROOMS / 4 BATHROOMS / INTERIOR AND EXTERIOR KITCHEN"
+      />
+      <div className="w-full bg-[#f7f5f4] flex flex-col md:flex-row">
+        <div className="w-full md:w-1/2 flex flex-col justify-center items-start text-black p-[5%] md:p-[10%] gap-5 md:gap-10">
+          <Typography className="text-sm md:text-base font-semibold">
+            34 West Menlo — SF, CA
+          </Typography>
+          <Typography className="text-3xl md:text-4xl font-medium leading-snug">
+            Lorem ipsum dolor sit amet tellus consectetur. Non ut sem tellus
+            velit tempus curabitur integer duis maecenas. Massa eu tincidunt
+          </Typography>
+        </div>
+        <div className="w-full md:w-1/2 flex flex-col justify-center items-start text-black p-[5%] md:p-[10%] gap-5 md:gap-10">
+          <Typography className="text-sm md:text-base font-semibold">
+            Phone Number / Email
+          </Typography>
+          <Typography className="text-3xl md:text-4xl font-semibold leading-snug">
+            +3 2343 4323 432
+          </Typography>
+          <Typography className="text-3xl md:text-4xl font-semibold leading-snug">
+            sales@habitat.com
+          </Typography>
+        </div>
+      </div>
+      <div className="flex justify-center items-center text-white p-[5%] md:p-[10%] bg-backgroundDark">
+        <Typography className="text-7xl md:text-9xl font-medium leading-snug text-center pl-[10%] pr-[10%] md:pl-[25%] md:pr-[25%]">
+          TRUE & FAIR REAL ESTATE AGENCY
+        </Typography>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ const theme = createTheme({
     },
     secondary: {
       main: "#dc004e",
+      dark: "#1e1e1e"
     },
     error: {
       main: "#f44336",
@@ -19,14 +20,14 @@ const theme = createTheme({
       default: "#f5f5f5",
     },
     warning: {
-        main: "#ffa726",
-        dark: "#f57c00",
-        light: "#ffb74d"
+      main: "#ffa726",
+      dark: "#f57c00",
+      light: "#ffb74d"
     },
     success: {
-        main: "#66bb6a",
-        dark: "#388e3c",
-        light: "#81c784",
+      main: "#66bb6a",
+      dark: "#388e3c",
+      light: "#81c784",
     },
   },
   typography: {
