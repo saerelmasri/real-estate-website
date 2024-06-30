@@ -8,6 +8,7 @@ import DragHandleIcon from "@mui/icons-material/DragHandle";
 import Marquee from "react-fast-marquee";
 import { styled } from "@mui/material/styles";
 import clsx from "clsx";
+import { usePathname, useRouter } from "next/navigation";
 
 const buttons = [
   "About",
@@ -53,6 +54,8 @@ const AnimatedIconButton = styled(IconButton)(({ theme }) => ({
 }));
 
 function NavBar() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -73,13 +76,25 @@ function NavBar() {
       >
         <div className="flex items-center justify-between bg-transparent pt-3">
           <Box className={"flex justify-center items-center ml-[10%]"}>
-            <Typography
-              variant="h2"
-              color={menuOpen === true ? "primary" : "black"}
-              fontWeight={900}
+            <Button
+              variant="text"
+              sx={{
+                color:
+                  menuOpen === true
+                    ? "primary"
+                    : pathname === "/contact"
+                    ? "white"
+                    : "black",
+                fontWeight: 900,
+                "&:hover": {
+                  background: "none",
+                },
+              }}
+              className="text-3xl capitalize"
+              onClick={() => router.push("/")}
             >
               Habitat
-            </Typography>
+            </Button>
           </Box>
           <Box
             className={"flex justify-center items-center w-[40%]"}
@@ -89,7 +104,13 @@ function NavBar() {
               <Typography
                 fontWeight={900}
                 className="text-base"
-                color={menuOpen === true ? "primary" : "black"}
+                color={
+                  menuOpen === true
+                    ? "primary"
+                    : pathname === "/contact"
+                    ? "white"
+                    : "black"
+                }
               >
                 +0 (323) 4209-23-85
               </Typography>
@@ -122,6 +143,7 @@ function NavBar() {
                   backgroundColor: `${menuOpen === true ? "white" : "black"}`,
                 }}
                 className="hidden xl:inline-block"
+                onClick={() => router.push("/contact")}
               >
                 <Marquee autoFill speed={35}>
                   <Typography
