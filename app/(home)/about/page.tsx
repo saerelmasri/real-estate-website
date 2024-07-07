@@ -1,24 +1,15 @@
 "use client";
 
-import AboutPoints from "@/components/AboutPoints";
-import RatingComponent from "@/components/Rating";
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
+
+import AboutPoints from "@/components/AboutPoints";
+import RatingComponent from "@/components/Rating";
 import SocialBtn from "@/components/SocialBtn";
 import TeamCard from "@/components/TeamCard";
-import { ratingInfo, teamMember, whoAreWe } from "@/constants";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Divider,
-  Grid,
-  Typography,
-  keyframes,
-} from "@mui/material";
+import { teamMember, whoAreWe } from "@/constants";
+import { Divider, Grid, Typography } from "@mui/material";
 import React from "react";
 
 function About() {

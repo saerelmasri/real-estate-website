@@ -10,13 +10,20 @@ import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
 
+// const buttons = [
+//   "About",
+//   "Listing",
+//   "Contact",
+//   "Careers",
+//   "Search Page",
+//   "News & Press",
+// ];
+
 const buttons = [
-  "About",
-  "Listing",
-  "Contact",
-  "Careers",
-  "Search Page",
-  "News & Press",
+  { title: "About", url: "/about" },
+  { title: "Listing", url: "/listing" },
+  { title: "Contact", url: "/contact" },
+  { title: "Future Projects", url: "/future-projects" },
 ];
 
 const AnimatedIconButton = styled(IconButton)(({ theme }) => ({
@@ -218,7 +225,14 @@ function NavBar() {
             }}
           >
             {buttons.map((item, key) => (
-              <Button variant="text" key={key}>
+              <Button
+                variant="text"
+                key={key}
+                onClick={() => {
+                  router.push(`${item.url}`);
+                  setMenuOpen(false);
+                }}
+              >
                 <Typography
                   className="text-6xl md:text-4xl lg:text-5xl xl:text-6xl text-left"
                   sx={{
@@ -228,7 +242,7 @@ function NavBar() {
                     },
                   }}
                 >
-                  {item}
+                  {item.title}
                 </Typography>
               </Button>
             ))}
