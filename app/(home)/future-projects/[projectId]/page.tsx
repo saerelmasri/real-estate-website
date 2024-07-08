@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Button, Divider, IconButton, Typography } from "@mui/material";
@@ -76,7 +77,7 @@ function FutureProjects() {
                       3120 SQ. FT.
                     </Typography>
                   </div>
-                  <div className="h-1/2 flex justify-center items-center p-5">
+                  <div className="h-1/2 flex justify-center items-center pl-10">
                     <Typography className="font-satoshi-medium text-sm text-black">
                       300 Drive Street Warm Springs, Tenerife
                     </Typography>
@@ -110,9 +111,74 @@ function FutureProjects() {
               </AnimatedButton>
             </div>
           </div>
-          <div className="border border-black w-full mt-[5%]">
-
+          <div className=" w-full mt-[5%]">
+            <img
+              src="/images/listingCover.jpeg"
+              alt="Menu Image"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
           </div>
+          <div className="w-full mt-[5%] flex">
+            <div className=" w-1/2 flex flex-col pt-10 pb-10">
+              <div className="flex pr-10">
+                <div className="flex flex-col items-start justify-center w-1/2">
+                  <Typography className="font-satoshi-medium text-sm text-black font-medium">
+                    Project
+                  </Typography>
+                  <Typography className="font-satoshi-medium text-base text-black font-semibold mt-1">
+                    Marilot Dual
+                  </Typography>
+                </div>
+                <div className="flex flex-col items-end justify-center w-1/2">
+                  <Typography className="font-satoshi-medium text-sm text-black font-medium">
+                    Neighborhood
+                  </Typography>
+                  <Typography className="font-satoshi-medium text-base text-black font-semibold mt-1">
+                    Warm Springs
+                  </Typography>
+                </div>
+              </div>
+              <div>
+                <Typography className="font-satoshi-medium text-gray-500 text-3xl pt-5 leading-snug">
+                  Lorem ipsum dolor sit amet consectetur. Tempor sed ornare non
+                  dolor dolor sapien scelerisque. Lobortis hendrerit ipsum
+                  turpis malesuada mauris. Fames mattis enim id id euismod. Amet
+                  arcu orci ullamcorper lacinia phasellus massa. Sed sed quisque
+                  fermentum enim lacus ornare.
+                </Typography>
+              </div>
+            </div>
+            <div className="w-1/2 p-10">
+              <Typography className="font-satoshi-medium text-base text-black">
+                Starting From
+              </Typography>
+              <Typography className="font-satoshi-medium text-3xl text-black mt-2">
+                $720.000
+              </Typography>
+              <Divider className="w-[30%] mt-5" />
+              <Typography className="font-satoshi-medium text-sm text-black mt-5">
+                2 Bathrooms
+              </Typography>
+              <Divider className="w-[30%] mt-5" />
+              <Typography className="font-satoshi-medium text-sm text-black mt-5">
+                Full Kitchen
+              </Typography>
+              <Divider className="w-[30%] mt-5" />
+              <Typography className="font-satoshi-medium text-sm text-black mt-5">
+                4 Bedrooms
+              </Typography>
+              <Divider className="w-[30%] mt-5" />
+              <Typography className="font-satoshi-medium text-sm text-black mt-5">
+                2 Parking Spots
+              </Typography>
+              <Divider className="w-[30%] mt-5" />
+            </div>
+          </div>
+          <div className="w-full mt-[5%] border border-black h-[600px]"></div>
         </div>
       </div>
     </div>
