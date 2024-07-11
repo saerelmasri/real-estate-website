@@ -3,45 +3,8 @@
 
 import { Button, Divider, IconButton, Typography } from "@mui/material";
 import KeyIcon from "@mui/icons-material/Key";
-import styled from "styled-components";
-
-const AnimatedButton = styled(Button)(({ theme }) => ({
-  position: "relative",
-  overflow: "hidden",
-  color: "white",
-  backgroundColor: "black",
-  transition: "color 1s, background-color 1s",
-  zIndex: 1,
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    bottom: "0%",
-    left: "50%",
-    width: "300%",
-    height: "300%",
-    backgroundColor: "#ffffff",
-    transform: "translate(-50%, 50%) scale(0)",
-    transition: "transform 1s",
-    borderRadius: "50%",
-    zIndex: 0,
-  },
-  "&:hover::before": {
-    transform: "translate(-50%, 50%) scale(1)",
-  },
-  "&:hover": {
-    "& span": {
-      color: "#000000",
-      position: "relative",
-      zIndex: 1,
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      fontFamily: "inherit",
-      fontStyle: "inherit",
-      fontStretch: "inherit",
-      fontVariant: "inherit",
-    },
-  },
-}));
+import GetInTouch from "@/components/GetInTouch";
+import AnimatedButtonBlack from "@/components/AnimatedButtonBlack";
 
 function FutureProjects() {
   return (
@@ -100,15 +63,7 @@ function FutureProjects() {
               <Divider orientation="vertical" sx={{ color: "#6b7280" }} />
             </div>
             <div className="w-1/3  flex justify-end items-center">
-              <AnimatedButton
-                variant="contained"
-                size="large"
-                className={
-                  "rounded-3xl h-2/5 w-2/5 bg-black text-white font-semibold font-satoshi-medium text-xs"
-                }
-              >
-                <span>Contact an Agent</span>
-              </AnimatedButton>
+              <AnimatedButtonBlack text="Contact an Agent" sx="rounded-3xl h-2/5 w-2/5 bg-black text-white font-semibold font-satoshi-medium text-xs"/>
             </div>
           </div>
           <div className=" w-full mt-[5%]">
@@ -178,8 +133,68 @@ function FutureProjects() {
               <Divider className="w-[30%] mt-5" />
             </div>
           </div>
-          <div className="w-full mt-[5%] border border-black h-[600px]"></div>
         </div>
+        <div className="w-full mt-[5%] border border-black h-[600px]"></div>
+        <div className="w-full mt-[5%] pl-[10%] pt-[5%] pb-[5%]">
+          <Typography className="text-7xl font-satoshi-regular text-black">
+            Finishes
+          </Typography>
+        </div>
+        <div className="relative overflow-hidden h-[900px] ">
+          <img
+            src="/images/finish1.jpeg"
+            alt="Finishes #1"
+            className="h-[200px] w-[200px] absolute top-[10%] left-[15%] z-10"
+          />
+          <img
+            src="/images/finish2.jpeg"
+            alt="Finishes #2"
+            className="h-[350px] w-[350px] absolute top-[5%] left-[35%] z-30"
+          />
+          <img
+            src="/images/finish3.jpeg"
+            alt="Finishes #3"
+            className="h-[450px] w-[450px] absolute top-[20%] left-[20%] z-10"
+          />
+          <img
+            src="/images/finish4.jpeg"
+            alt="Finishes #4"
+            className="h-[600px] w-[350px] absolute top-[5%] left-[60%] z-30"
+          />
+          <img
+            src="/images/finish5.jpeg"
+            alt="Finishes #5"
+            className="h-[300px] w-[200px] absolute top-[55%] left-[55%] z-10"
+          />
+          <img
+            src="/images/finish6.jpeg"
+            alt="Finishes #6"
+            className="h-[200px] w-[150px] absolute top-[25%] left-[75%] z-40"
+          />
+        </div>
+        <div className="w-full mt-[5%] p-[5%] flex justify-center">
+          <div className="w-1/3 pl-[4%] pr-[4%] flex justify-center">
+            <Typography className="font-satoshi-medium text-lg text-black">
+              Detailed Option
+            </Typography>
+          </div>
+          <div className="w-1/3 pl-[4%] pr-[4%]">
+            <Typography className="font-satoshi-medium text-lg text-black">
+              Our homes feature polished marble countertops, custom cabinetry,
+              and premium hardwood flooring, designed for a modern living
+              experience.
+            </Typography>
+          </div>
+          <div className="w-1/3 pl-[4%] pr-[4%]">
+            <Typography className="font-satoshi-medium text-lg text-black">
+              Experience unparalleled elegance with our top-quality finishes.
+              From the sleek stainless steel appliances to the elegant bathroom
+              fixtures, every element has been carefully selected to ensure a
+              perfect blend of style and functionality.
+            </Typography>
+          </div>
+        </div>
+        <GetInTouch/>
       </div>
     </div>
   );

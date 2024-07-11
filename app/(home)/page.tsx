@@ -9,6 +9,7 @@ import NewHousesListing from "@/components/Home/NewHousesListing";
 import AboutSection from "@/components/Home/AboutSection";
 import QASection from "@/components/Home/QASection";
 import DiscoverSection from "@/components/Home/DiscoverSection";
+import GetInTouch from "@/components/GetInTouch";
 
 function Home() {
   return (
@@ -110,28 +111,7 @@ function Home() {
         projectName="BORG 15"
         projectDescription="4 BEDROOMS / 4 BATHROOMS / INTERIOR AND EXTERIOR KITCHEN"
       />
-      <div className="w-full bg-[#f7f5f4] flex flex-col md:flex-row">
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-start text-black p-[5%] md:p-[10%] gap-5 md:gap-10">
-          <Typography className="text-sm md:text-base font-semibold">
-            34 West Menlo — SF, CA
-          </Typography>
-          <Typography className="text-3xl md:text-4xl font-medium leading-snug">
-            Lorem ipsum dolor sit amet tellus consectetur. Non ut sem tellus
-            velit tempus curabitur integer duis maecenas. Massa eu tincidunt
-          </Typography>
-        </div>
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-start text-black p-[5%] md:p-[10%] gap-5 md:gap-10">
-          <Typography className="text-sm md:text-base font-semibold">
-            Phone Number / Email
-          </Typography>
-          <Typography className="text-3xl md:text-4xl font-semibold leading-snug">
-            +3 2343 4323 432
-          </Typography>
-          <Typography className="text-3xl md:text-4xl font-semibold leading-snug">
-            sales@habitat.com
-          </Typography>
-        </div>
-      </div>
+      <GetInTouch/>
       <div className="flex justify-center items-center text-white p-[5%] md:p-[10%] bg-backgroundDark">
         <Typography className="text-7xl md:text-9xl font-medium leading-snug text-center pl-[10%] pr-[10%] md:pl-[25%] md:pr-[25%]">
           TRUE & FAIR REAL ESTATE AGENCY
