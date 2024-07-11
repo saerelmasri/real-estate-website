@@ -353,7 +353,7 @@ function Project() {
             )}
           </div>
         </div>
-        <MapComponent/>
+        <MapComponent />
         <div
           className="w-full mt-[5%] pl-[10%] pt-[5%] pb-[5%]"
           ref={section2Ref}

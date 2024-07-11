@@ -1,18 +1,14 @@
-import {
-  FormControl,
-  FormHelperText,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import { styled } from "@mui/system";
 import React, { useState } from "react";
 
 const StyledSelect = styled(Select)(({ theme }) => ({
   "& .MuiSelect-select": {
-    borderBottom: "2px solid", // Only bottom border
     borderColor: theme.palette.primary.main,
     borderRadius: 0,
+    "&:focus": {
+      backgroundColor: "transparent", // Make background transparent when focused
+    },
   },
   "& .MuiSelect-icon": {
     transition: "transform 0.3s",
@@ -21,21 +17,18 @@ const StyledSelect = styled(Select)(({ theme }) => ({
   },
 }));
 
-function SelectComponent() {
-  const [open, setOpen] = useState(false);
-  const [age, setAge] = useState<number | string>(0);
+type SelectComponentProp = {
+  title: string;
+};
 
-  const handleChange = (event: SelectChangeEvent<number | string>) => {
+function SelectComponent({ title }: SelectComponentProp) {
+  const [open, setOpen] = useState(false);
+  const [age, setAge] = useState<any>(0);
+
+  const handleChange = (event: any) => {
     setAge(event.target.value);
   };
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
     <FormControl fullWidth variant="standard" className={"bg-transparent"}>
       <StyledSelect
@@ -61,7 +54,7 @@ function SelectComponent() {
         <MenuItem value={20}>Rent</MenuItem>
       </StyledSelect>
       <FormHelperText className="text-sm font-satoshi-medium font-semibold">
-        Type
+        {title}
       </FormHelperText>
     </FormControl>
   );
