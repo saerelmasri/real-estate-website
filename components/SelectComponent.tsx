@@ -30,7 +30,11 @@ function SelectComponent({ title }: SelectComponentProp) {
   };
 
   return (
-    <FormControl fullWidth variant="standard" className={"bg-transparent"}>
+    <FormControl
+      fullWidth
+      variant="standard"
+      className={"bg-transparent overflow-hidden"}
+    >
       <StyledSelect
         value={age}
         onChange={handleChange}

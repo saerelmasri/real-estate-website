@@ -24,6 +24,7 @@ const buttons = [
   { title: "Listing", url: "/listing" },
   { title: "Contact", url: "/contact" },
   { title: "Future Projects", url: "/future-projects" },
+  { title: "Search Page", url: "/search-page" },
 ];
 
 const AnimatedIconButton = styled(IconButton)(({ theme }) => ({

@@ -15,6 +15,7 @@ import VectorLayer from "ol/layer/Vector";
 import Style from "ol/style/Style";
 import Icon from "ol/style/Icon";
 import { Box } from "@mui/system";
+import PropertyCard from "@/components/PropertyCard";
 
 function SearchPage() {
   const mapElement = useRef(null);
@@ -66,12 +67,12 @@ function SearchPage() {
   return (
     <div className="bg-[#f7f5f4] bg-cover">
       <div className="w-full flex flex-col">
-        <div className="w-full mt-[100px] flex flex-col justify-center items-start pl-[10%] pr-[10%] pt-[5%] pb-[5%]">
+        <div className="w-full mt-[100px] flex flex-col justify-center items-start pl-[10%] pr-[10%] pt-[5%] pb-[5%] overflow-hidden">
           <Grid
             container
             spacing={2}
             gap={7}
-            className="border border-black w-full flex justify-center p-[2%]"
+            className="w-full flex justify-center p-[2%]"
           >
             <Grid item lg={1.5}>
               <SelectComponent title="Pricing" />
@@ -87,43 +88,16 @@ function SearchPage() {
             </Grid>
           </Grid>
         </div>
-        <div className="border border-black w-full h-[100vh] flex">
+        <div className="w-full h-[100vh] flex">
           <div className="w-3/4" ref={mapElement} />
-          <div className="border border-black w-1/4 overflow-visible flex flex-col">
-            <Box
-              className={
-                "border border-black w-full h-[35%] flex items-center p-[5%]"
-              }
-            >
-              <div className={"w-2/5 h-[90%] border border-black"}>
-                <img
-                  src="/images/house1.jpeg"
-                  alt="Menu Image"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
-              </div>
-              <div className={"w-3/5 h-[90%] border border-black"}>
-                <div>
-                  <Typography className="font-satoshi-medium text-base text-black uppercase">
-                    Borg 15
-                  </Typography>
-                  <Typography className="font-satoshi-medium text-xs text-gray-500">
-                    Single Family
-                  </Typography>
-                </div>
-                <div>
-                  <Typography className="font-satoshi-medium text-xs text-gray-500">
-                    2 bds - 3 ba
-                  </Typography>
-                  <Typography className="font-satoshi-medium text-xs text-gray-500">
-                    1450 sq. ft.
-                  </Typography>
-                </div>
-              </div>
-            </Box>
+          <div className="w-1/4 overflow-y-scroll">
+            <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
           </div>
         </div>
       </div>

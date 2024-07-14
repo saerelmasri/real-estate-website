@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Properties {
+  id          Int       @id @default(autoincrement())
+  name        String
+  type        String
+  price       Int
+  size        Int
+  location    String
+  readyToMove Boolean   @default(false)
+  project     String
+  latitude    Decimal
+  longitude   Decimal
+  detail      Details[]
+}
+
+model Details {
+  id           Int         @id @default(autoincrement())
+  detail       String
+  quantity     Int?
+  Properties   Properties? @relation(fields: [propertiesId], references: [id])
+  propertiesId Int?
+}
