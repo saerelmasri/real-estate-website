@@ -10,15 +10,6 @@ import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
 
-// const buttons = [
-//   "About",
-//   "Listing",
-//   "Contact",
-//   "Careers",
-//   "Search Page",
-//   "News & Press",
-// ];
-
 const buttons = [
   { title: "About", url: "/about" },
   { title: "Listing", url: "/listing" },

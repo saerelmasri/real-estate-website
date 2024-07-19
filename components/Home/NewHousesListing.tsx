@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { Divider, Grid, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { Box, keyframes } from "@mui/system";
-import React, { useEffect, useRef, useState } from "react";
-import PropertyCard from "../Property/PropertyCard";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import GridListing from "./GridListing";
 
 const slideInFromBottom = keyframes`
   0% {
@@ -91,48 +91,7 @@ function NewHousesListing() {
           </div>
           <Divider sx={{ opacity: 0.8, width: "80%", marginTop: 5 }} />
           <Box className="w-full">
-            <Grid
-              container
-              spacing={2}
-              direction="column"
-              sx={{
-                paddingTop: 10,
-                paddingBottom: 10,
-                animation: `${slideInFromBottom} 1.2s ease-out`,
-                opacity: 1,
-              }}
-              className="flex-col justify-center items-start pl-[10%] pr-[10%] lg:flex-row md:items-center lg:pl-0 lg:pr-0"
-            >
-              <Grid item xs={3}>
-                <PropertyCard
-                  imageProperty="/images/prop1.jpg"
-                  propertyName="Becali Residence"
-                  propertyLocation="Palo Alto"
-                  propertySize="Single Family"
-                  propertyPrice="320"
-                />
-              </Grid>
-
-              <Grid item xs={3}>
-                <PropertyCard
-                  imageProperty="/images/prop1.jpg"
-                  propertyName="Becali Residence"
-                  propertyLocation="Palo Alto"
-                  propertySize="Single Family"
-                  propertyPrice="320"
-                />
-              </Grid>
-
-              <Grid item xs={3}>
-                <PropertyCard
-                  imageProperty="/images/prop1.jpg"
-                  propertyName="Becali Residence"
-                  propertyLocation="Palo Alto"
-                  propertySize="Single Family"
-                  propertyPrice="320"
-                />
-              </Grid>
-            </Grid>
+            <GridListing slideInFromBottom={slideInFromBottom} />
           </Box>
         </>
       )}

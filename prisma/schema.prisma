@@ -11,7 +11,7 @@ datasource db {
 model Properties {
   id          Int       @id @default(autoincrement())
   name        String
-  type        String
+  propertyUse String
   price       Int
   size        Int
   location    String
@@ -19,6 +19,7 @@ model Properties {
   project     String
   latitude    Decimal
   longitude   Decimal
+  imageNumber Int
   detail      Details[]
 }
 
@@ -26,6 +27,6 @@ model Details {
   id           Int         @id @default(autoincrement())
   detail       String
   quantity     Int?
-  Properties   Properties? @relation(fields: [propertiesId], references: [id])
   propertiesId Int?
+  Properties   Properties? @relation(fields: [propertiesId], references: [id])
 }

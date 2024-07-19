@@ -6,23 +6,27 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 type PropertyCard = {
+  propertyId: number;
   imageProperty: string;
   propertyName: string;
   propertyLocation: string;
-  propertySize: string;
+  propertySize: number;
   propertyPrice: string;
 };
 
 function PropertyCard({
+  propertyId,
   imageProperty,
   propertyName,
   propertyLocation,
   propertySize,
   propertyPrice,
 }: PropertyCard) {
+  const router = useRouter();
   return (
     <Card
       sx={{
@@ -37,14 +41,14 @@ function PropertyCard({
       variant="outlined"
     >
       <CardContent sx={{ padding: 0, backgroundColor: "transparent" }}>
-        <CardActionArea>
+        <CardActionArea onClick={() => router.push(`/property/${propertyId}`)}>
           <CardMedia
             component="img"
             alt="Property Image"
             src={imageProperty}
             sx={{
               width: "100%",
-              height: "auto",
+              height: "300px",
               backgroundPosition: "center",
               cursor: "pointer",
             }}
@@ -81,7 +85,7 @@ function PropertyCard({
               color="#999999"
               className={"font-satoshi-regular text-sm"}
             >
-              {propertySize} / From - {propertyPrice}$k
+              {propertySize}m<sup>2</sup> / From - ${propertyPrice}
             </Typography>
           </Box>
         </Box>
