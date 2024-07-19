@@ -106,12 +106,8 @@ function Home() {
         <Divider sx={{ opacity: 0.8, width: "80%", marginTop: 5 }} />
         <QASection />
       </div>
-      <DiscoverSection
-        imageUrl="bg-hero2"
-        projectName="BORG 15"
-        projectDescription="4 BEDROOMS / 4 BATHROOMS / INTERIOR AND EXTERIOR KITCHEN"
-      />
-      <GetInTouch/>
+      <DiscoverSection />
+      <GetInTouch />
       <div className="flex justify-center items-center text-white p-[5%] md:p-[10%] bg-backgroundDark">
         <Typography className="text-7xl md:text-9xl font-medium leading-snug text-center pl-[10%] pr-[10%] md:pl-[25%] md:pr-[25%]">
           TRUE & FAIR REAL ESTATE AGENCY

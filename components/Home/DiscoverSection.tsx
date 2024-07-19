@@ -6,6 +6,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import styled from "styled-components";
+import { fetchData } from "@/tools/api";
+import { useRouter } from "next/navigation";
 
 const AnimatedIconButton = styled(IconButton)(({ theme }) => ({
   position: "relative",
@@ -55,15 +57,61 @@ type DiscoverProp = {
   projectDescription: string;
 };
 
-function DiscoverSection({
-  imageUrl,
-  projectName,
-  projectDescription,
-}: DiscoverProp) {
+type Details = {
+  detail: string;
+  quantity: number | null;
+};
+
+type Property = {
+  name: string;
+  propertyUse: string;
+  price: number;
+  size: number;
+  location: string;
+  readyToMove: boolean;
+  project: string;
+  latitude: number;
+  longitude: number;
+  imageNumber: number;
+  detail: Details[];
+};
+
+function DiscoverSection() {
+  const route = useRouter();
   const [isVisible, setIsVisible] = useState(false);
+  const [property, setProperty] = useState<Property>({
+    name: "",
+    propertyUse: "",
+    price: 0,
+    size: 0,
+    location: "",
+    readyToMove: false,
+    project: "",
+    latitude: 0,
+    longitude: 0,
+    imageNumber: 0,
+    detail: [
+      {
+        detail: "",
+        quantity: 0,
+      },
+    ],
+  });
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await fetchData(`/api/property/8`);
+        if (response && response.data) {
+          setProperty(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching properties:", error);
+      }
+    };
+
+    fetchProperties();
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -88,7 +136,7 @@ function DiscoverSection({
   }, []);
   return (
     <div
-      className={`w-full h-[90vh] ${imageUrl} bg-cover bg-no-repeat bg-center flex flex-col justify-center relative`}
+      className={`w-full h-[90vh] bg-hero bg-cover bg-no-repeat bg-center flex flex-col justify-center relative`}
       ref={sectionRef}
     >
       {isVisible && (
@@ -101,7 +149,7 @@ function DiscoverSection({
                 animationDelay: "0.3s",
               }}
             >
-              {projectName}
+              {property.name}
             </Typography>
           </div>
           <div
@@ -114,20 +162,28 @@ function DiscoverSection({
             <Typography className="text-lg md:text-xl font-semibold text-white">
               Discover the Project
             </Typography>
-            <AnimatedIconButton size="small">
+            <AnimatedIconButton
+              size="small"
+              onClick={() => {
+                route.push("/property/8");
+              }}
+            >
               <ArrowRightAltIcon />
             </AnimatedIconButton>
           </div>
           <div className="w-full h-[20%] flex justify-start items-end gap-5 absolute bottom-0 left-0 p-10">
-            <Typography
-              className="text-md md:text-xl font-semibold text-white"
-              sx={{
-                animation: `${slideUpFromBehind} 1s ease-out`,
-                animationDelay: "0.3s",
-              }}
-            >
-              {projectDescription}
-            </Typography>
+            {property.detail.map((item, index) => (
+              <Typography
+                key={index}
+                className="text-md md:text-xl font-semibold text-white uppercase"
+                sx={{
+                  animation: `${slideUpFromBehind} 1s ease-out`,
+                  animationDelay: "0.3s",
+                }}
+              >
+                {item.quantity} {item.detail} /
+              </Typography>
+            ))}
           </div>
         </>
       )}

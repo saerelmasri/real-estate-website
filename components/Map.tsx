@@ -11,18 +11,25 @@ import VectorLayer from "ol/layer/Vector";
 import Style from "ol/style/Style";
 import Icon from "ol/style/Icon";
 
-const MapComponent = () => {
+type MapCoordinates = {
+  longitude: number;
+  latitude: number;
+};
+
+const MapComponent = ({ longitude, latitude }: MapCoordinates) => {
   const mapElement = useRef(null);
 
   useEffect(() => {
+    if (!longitude || !latitude) return;
+
     const iconFeature = new Feature({
-      geometry: new Point(fromLonLat([-74.006, 40.7128])), // Hard-coded coordinates (e.g., New York City)
+      geometry: new Point(fromLonLat([longitude, latitude])),
     });
 
     const iconStyle = new Style({
       image: new Icon({
         anchor: [0.5, 1],
-        src: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png', // URL to the marker image
+        src: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
       }),
     });
 
@@ -44,26 +51,20 @@ const MapComponent = () => {
             url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
           }),
         }),
-        vectorLayer, // Add the vector layer containing the marker
+        vectorLayer,
       ],
       view: new View({
-        center: fromLonLat([-74.006, 40.7128]), // Center on the marker coordinates
+        center: fromLonLat([longitude, latitude]),
         zoom: 10,
       }),
     });
 
-    // Clean up on unmount
     return () => {
       map.setTarget(null);
     };
-  }, []);
+  }, [longitude, latitude]);
 
-  return (
-    <div
-      ref={mapElement}
-      className="w-full mt-[5%] h-[600px]"
-    ></div>
-  );
+  return <div ref={mapElement} className="w-full mt-[5%] h-[600px]"></div>;
 };
 
 export default MapComponent;

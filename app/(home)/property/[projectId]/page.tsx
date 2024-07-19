@@ -8,7 +8,8 @@ import GetInTouch from "@/components/GetInTouch";
 import AnimatedButtonBlack from "@/components/AnimatedButtonBlack";
 import { useEffect, useRef, useState } from "react";
 import MapComponent from "@/components/Map";
-import { useRouter } from "next/router";
+import { fetchData } from "@/tools/api";
+import { kFormatter } from "@/components/Home/GridListing";
 
 const slideUpFromBehind = keyframes`
   0% {
@@ -21,14 +22,64 @@ const slideUpFromBehind = keyframes`
   }
 `;
 
+type Details = {
+  detail: string;
+  quantity: number | null;
+};
+
+type Property = {
+  name: string;
+  propertyUse: string;
+  price: number;
+  size: number;
+  location: string;
+  readyToMove: boolean;
+  project: string;
+  latitude: number;
+  longitude: number;
+  imageNumber: number;
+  detail: Details[];
+};
+
 function Project({ params }: { params: { projectId: number } }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [property, setProperty] = useState<Property>({
+    name: "",
+    propertyUse: "",
+    price: 0,
+    size: 0,
+    location: "",
+    readyToMove: false,
+    project: "",
+    latitude: 0,
+    longitude: 0,
+    imageNumber: 0,
+    detail: [
+      {
+        detail: "",
+        quantity: 0,
+      },
+    ],
+  });
+  const [count, setCount] = useState<number>(0);
+
   const sectionRef = useRef(null);
   const section2Ref = useRef(null);
 
-  console.log(params.projectId);
-
   useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await fetchData(`/api/property/${params.projectId}`);
+        if (response && response.data) {
+          setProperty(response.data);
+          setCount((prevCount) => prevCount + 1);
+        }
+      } catch (error) {
+        console.error("Error fetching properties:", error);
+      }
+    };
+
+    fetchProperties();
     const observer = new IntersectionObserver(
       ([entry]) => {
         console.log("Intersection Observer Entry:", entry.isIntersecting); // Add this log
@@ -59,6 +110,9 @@ function Project({ params }: { params: { projectId: number } }) {
     };
   }, []);
 
+  console.log("Property:", property);
+  console.log("Renders:", count);
+
   return (
     <div className="bg-[#f7f5f4] bg-cover">
       <div className="w-full flex flex-col">
@@ -72,7 +126,7 @@ function Project({ params }: { params: { projectId: number } }) {
             }}
             className="text-7xl lg:text-9xl font-satoshi-regular text-black"
           >
-            BORG 15
+            {property.name}
           </Typography>
         </div>
         <div className="w-full flex flex-col justify-center items-start pl-[10%] pb-[5%] pr-[10%]">
@@ -84,7 +138,7 @@ function Project({ params }: { params: { projectId: number } }) {
                 animationDelay: "0.3s",
               }}
             >
-              SINGLE FAMILY / BORG 15 /
+              {property.propertyUse} / {property.name} /
             </Typography>
           </div>
           <Divider sx={{ width: "100%", color: "#6b7280", marginTop: 2 }} />
@@ -97,7 +151,7 @@ function Project({ params }: { params: { projectId: number } }) {
                   animationDelay: "0.3s",
                 }}
               >
-                $320.000
+                ${kFormatter(property.price)}
               </Typography>
               <Divider orientation="vertical" sx={{ color: "#6b7280" }} />
             </div>
@@ -106,24 +160,24 @@ function Project({ params }: { params: { projectId: number } }) {
                 <div className="w-[60%] h-full flex flex-col">
                   <div className="h-1/2 flex justify-center items-center">
                     <Typography
-                      className="font-satoshi-medium text-xl text-black"
+                      className="font-satoshi-medium text-xl text-black text-left"
                       sx={{
                         animation: `${slideUpFromBehind} 1s ease-out`,
                         animationDelay: "0.3s",
                       }}
                     >
-                      3120 SQ. FT.
+                      {property.size} SQ. FT.
                     </Typography>
                   </div>
-                  <div className="h-1/2 flex justify-center items-center pl-10">
+                  <div className="h-1/2 flex justify-center items-center">
                     <Typography
-                      className="font-satoshi-medium text-sm text-black"
+                      className="font-satoshi-medium text-sm text-black text-left"
                       sx={{
                         animation: `${slideUpFromBehind} 1s ease-out`,
                         animationDelay: "0.3s",
                       }}
                     >
-                      300 Drive Street Warm Springs, Tenerife
+                      {property.location}
                     </Typography>
                   </div>
                 </div>
@@ -148,7 +202,7 @@ function Project({ params }: { params: { projectId: number } }) {
                       animationDelay: "0.3s",
                     }}
                   >
-                    Ready to move
+                    Ready to move: {property.readyToMove == true ? "Yes" : "No"}
                   </Typography>
                   <KeyIcon
                     sx={{
@@ -203,7 +257,7 @@ function Project({ params }: { params: { projectId: number } }) {
                           animationDelay: "0.3s",
                         }}
                       >
-                        Marilot Dual
+                        {property.project}
                       </Typography>
                     </div>
                     <div className="flex flex-col items-end justify-center w-1/2">
@@ -223,7 +277,7 @@ function Project({ params }: { params: { projectId: number } }) {
                         }}
                         className="font-satoshi-medium text-base text-black font-semibold mt-1"
                       >
-                        Warm Springs
+                        {property.location}
                       </Typography>
                     </div>
                   </div>
@@ -260,7 +314,7 @@ function Project({ params }: { params: { projectId: number } }) {
                       animationDelay: "0s",
                     }}
                   >
-                    $720.000
+                    ${kFormatter(property.price)}
                   </Typography>
                   <Divider
                     className="w-[30%] mt-10"
@@ -271,92 +325,40 @@ function Project({ params }: { params: { projectId: number } }) {
                       animationDelay: "0s",
                     }}
                   />
-                  <Typography
-                    className="font-satoshi-medium text-sm text-black mt-5"
-                    sx={{
-                      animation: isVisible
-                        ? `${slideUpFromBehind} 1s ease-out`
-                        : "none",
-                      animationDelay: "0s",
-                    }}
-                  >
-                    2 Bathrooms
-                  </Typography>
-                  <Divider
-                    className="w-[30%] mt-5"
-                    sx={{
-                      animation: isVisible
-                        ? `${slideUpFromBehind} 1s ease-out`
-                        : "none",
-                      animationDelay: "0s",
-                    }}
-                  />
-                  <Typography
-                    className="font-satoshi-medium text-sm text-black mt-5"
-                    sx={{
-                      animation: isVisible
-                        ? `${slideUpFromBehind} 1s ease-out`
-                        : "none",
-                      animationDelay: "0s",
-                    }}
-                  >
-                    Full Kitchen
-                  </Typography>
-                  <Divider
-                    className="w-[30%] mt-5"
-                    sx={{
-                      animation: isVisible
-                        ? `${slideUpFromBehind} 1s ease-out`
-                        : "none",
-                      animationDelay: "0s",
-                    }}
-                  />
-                  <Typography
-                    className="font-satoshi-medium text-sm text-black mt-5"
-                    sx={{
-                      animation: isVisible
-                        ? `${slideUpFromBehind} 1s ease-out`
-                        : "none",
-                      animationDelay: "0s",
-                    }}
-                  >
-                    4 Bedrooms
-                  </Typography>
-                  <Divider
-                    className="w-[30%] mt-5"
-                    sx={{
-                      animation: isVisible
-                        ? `${slideUpFromBehind} 1s ease-out`
-                        : "none",
-                      animationDelay: "0s",
-                    }}
-                  />
-                  <Typography
-                    className="font-satoshi-medium text-sm text-black mt-5"
-                    sx={{
-                      animation: isVisible
-                        ? `${slideUpFromBehind} 1s ease-out`
-                        : "none",
-                      animationDelay: "0s",
-                    }}
-                  >
-                    2 Parking Spots
-                  </Typography>
-                  <Divider
-                    className="w-[30%] mt-5"
-                    sx={{
-                      animation: isVisible
-                        ? `${slideUpFromBehind} 1s ease-out`
-                        : "none",
-                      animationDelay: "0s",
-                    }}
-                  />
+                  {property.detail.map((items, index) => (
+                    <>
+                      <Typography
+                        key={index}
+                        className="font-satoshi-medium text-sm text-black mt-5"
+                        sx={{
+                          animation: isVisible
+                            ? `${slideUpFromBehind} 1s ease-out`
+                            : "none",
+                          animationDelay: "0s",
+                        }}
+                      >
+                        {items.quantity} {items.detail}
+                      </Typography>
+                      <Divider
+                        className="w-[30%] mt-5"
+                        sx={{
+                          animation: isVisible
+                            ? `${slideUpFromBehind} 1s ease-out`
+                            : "none",
+                          animationDelay: "0s",
+                        }}
+                      />
+                    </>
+                  ))}
                 </div>
               </>
             )}
           </div>
         </div>
-        <MapComponent />
+        <MapComponent
+          longitude={property.longitude}
+          latitude={property.latitude}
+        />
         <div
           className="w-full mt-[5%] pl-[10%] pt-[5%] pb-[5%]"
           ref={section2Ref}

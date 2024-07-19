@@ -25,7 +25,7 @@ type Property = {
   detail: Details[];
 };
 
-function kFormatter(num: number): string {
+export function kFormatter(num: number): string {
   if (Math.abs(num) >= 1e6) {
     // Convert millions and above to "M" format
     return (num / 1e6).toFixed(1) + "M";
