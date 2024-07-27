@@ -110,9 +110,6 @@ function Project({ params }: { params: { projectId: number } }) {
     };
   }, []);
 
-  console.log("Property:", property);
-  console.log("Renders:", count);
-
   return (
     <div className="bg-[#f7f5f4] bg-cover">
       <div className="w-full flex flex-col">
@@ -171,7 +168,7 @@ function Project({ params }: { params: { projectId: number } }) {
                   </div>
                   <div className="h-1/2 flex justify-center items-center">
                     <Typography
-                      className="font-satoshi-medium text-sm text-black text-left"
+                      className="font-satoshi-medium text-sm text-black text-left pl-6"
                       sx={{
                         animation: `${slideUpFromBehind} 1s ease-out`,
                         animationDelay: "0.3s",

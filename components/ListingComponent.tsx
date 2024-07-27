@@ -9,16 +9,28 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { kFormatter } from "./Home/GridListing";
+import { useRouter } from "next/navigation";
 
 type ListingProps = {
-  imageURL: string;
+  propertyId: number;
+  imageNumber: number;
   propertyTitle: string;
+  propertyPrice: number;
   propertyLocation: string;
   propertySquare: string;
   propertyReadyIn?: string;
 };
 
-function ListingComponent() {
+function ListingComponent({
+  propertyId,
+  imageNumber,
+  propertyTitle,
+  propertyPrice,
+  propertyLocation,
+  propertySquare,
+}: ListingProps) {
+  const router = useRouter();
   return (
     <Card
       sx={{
@@ -27,20 +39,24 @@ function ListingComponent() {
         borderRadius: 0,
       }}
     >
-      <CardActionArea>
+      <CardActionArea
+        onClick={() => {
+          router.push(`/property/${propertyId}`);
+        }}
+      >
         <CardMedia
           sx={{ height: 500 }}
-          image="images/house1.jpeg"
-          title="green iguana"
+          image={`images/house${imageNumber}.jpeg`}
+          title={propertyTitle}
         />
       </CardActionArea>
       <CardContent sx={{ padding: 0 }}>
         <div className="flex justify-between items-center pt-3 pb-3">
           <Typography className="font-satoshi-medium text-xl">
-            BORG 15
+            {propertyTitle}
           </Typography>
           <Typography className="font-satoshi-medium text-xl">
-            $320.000
+            ${kFormatter(propertyPrice)}
           </Typography>
         </div>
         <Divider sx={{ opacity: 0.2 }} className="w-[100%]" color="black" />
@@ -49,7 +65,7 @@ function ListingComponent() {
             Location
           </Typography>
           <Typography className="font-satoshi-medium text-sm text-gray-500">
-            Los Angeles
+            {propertyLocation}
           </Typography>
         </div>
         <Divider sx={{ opacity: 0.2 }} className="w-[100%]" color="black" />
@@ -58,7 +74,7 @@ function ListingComponent() {
             Square Meters
           </Typography>
           <Typography className="font-satoshi-medium text-sm text-gray-500">
-            200m2
+            {propertySquare}m2
           </Typography>
         </div>
       </CardContent>

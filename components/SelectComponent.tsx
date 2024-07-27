@@ -1,6 +1,10 @@
+/* eslint-disable react/jsx-key */
+import { fetchData } from "@/tools/api";
 import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import { styled } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { kFormatter } from "./Home/GridListing";
+import { FiltersTypes, SelectComponentProp } from "@/types";
 
 const StyledSelect = styled(Select)(({ theme }) => ({
   "& .MuiSelect-select": {
@@ -17,17 +21,31 @@ const StyledSelect = styled(Select)(({ theme }) => ({
   },
 }));
 
-type SelectComponentProp = {
-  title: string;
-};
-
-function SelectComponent({ title }: SelectComponentProp) {
+function SelectComponent({
+  title,
+  filter,
+  value,
+  onChange,
+}: SelectComponentProp) {
   const [open, setOpen] = useState(false);
-  const [age, setAge] = useState<any>(0);
+  const [filters, setFilters] = useState<FiltersTypes>({ dataArray: [] });
 
-  const handleChange = (event: any) => {
-    setAge(event.target.value);
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const newValue = event.target.value as string | number;
+    onChange(filter, newValue);
   };
+  useEffect(() => {
+    const fetchFilters = async () => {
+      try {
+        const response = await fetchData(`/api/property/filters/${filter}`);
+        setFilters({ dataArray: Array.from(new Set(response.dataArray)) }); // Ensure unique values
+      } catch (error) {
+        console.error("Error fetching data");
+      }
+    };
+
+    fetchFilters();
+  }, [filter]);
 
   return (
     <FormControl
@@ -36,9 +54,9 @@ function SelectComponent({ title }: SelectComponentProp) {
       className={"bg-transparent overflow-hidden"}
     >
       <StyledSelect
-        value={age}
         onChange={handleChange}
         open={open}
+        value={value}
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         MenuProps={{
@@ -49,14 +67,21 @@ function SelectComponent({ title }: SelectComponentProp) {
           },
         }}
         inputProps={{
-          name: "age",
+          name: "",
           id: "uncontrolled-native",
         }}
       >
-        <MenuItem value={0}>Any</MenuItem>
-        <MenuItem value={10}>Buy</MenuItem>
-        <MenuItem value={20}>Rent</MenuItem>
+        {filters.dataArray.map((item, index) => (
+          <MenuItem key={`${item}-${index}`} value={item}>
+            {filter === "price" && typeof item === "number"
+              ? kFormatter(item)
+              : filter === "size" && typeof item === "number"
+              ? `${item}m2`
+              : item}
+          </MenuItem>
+        ))}
       </StyledSelect>
+
       <FormHelperText className="text-sm font-satoshi-medium font-semibold">
         {title}
       </FormHelperText>

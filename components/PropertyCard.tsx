@@ -1,59 +1,95 @@
 /* eslint-disable @next/next/no-img-element */
-import { Box, Typography } from "@mui/material";
-import React from "react";
+import { Card, CardActionArea, CardMedia, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { kFormatter } from "./Home/GridListing";
+import { useRouter } from "next/navigation";
 
-function PropertyCard() {
+type PropertyCard = {
+  id: number;
+  name: string;
+  propertyUse: string;
+  price: number;
+  size: number;
+  location: string;
+  imageNumber: number;
+  readyToMove: boolean;
+  index: number;
+  onHover: () => void;
+  onHoverOut: () => void;
+  isHovering: boolean;
+};
+
+function PropertyCard({
+  id,
+  name,
+  propertyUse,
+  price,
+  size,
+  location,
+  imageNumber,
+  readyToMove,
+  onHover,
+  onHoverOut,
+  isHovering,
+}: PropertyCard) {
+  const route = useRouter();
   return (
-    <Box
-      className={
-        "border border-black w-full h-[300px] flex items-center p-[2%] mb-0.5 cursor-pointer"
-      }
+    <Card
+      sx={{
+        borderRadius: "0",
+        border: isHovering ? "1px solid black" : "none",
+      }}
+      onMouseEnter={onHover}
+      onMouseLeave={onHoverOut}
     >
-      <div className={"w-2/5 h-[80%]"}>
-        <img
-          src="/images/house1.jpeg"
-          alt="Menu Image"
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-        />
-      </div>
-      <div className={"w-3/5 h-[80%] pl-[5%] flex flex-col justify-between"}>
-        <div>
-          <Typography className="font-satoshi-medium text-base text-black uppercase font-semibold">
-            Borg 15
-          </Typography>
-          <Typography className="font-satoshi-medium text-xs text-gray-500">
-            Single Family
-          </Typography>
+      <CardActionArea
+        onClick={() => {
+          route.push(`/property/${id}`);
+        }}
+        className={
+          "border border-black w-full h-[200px] flex items-center mb-0.5 cursor-pointer"
+        }
+      >
+        <CardMedia className={"w-2/4 h-[100%]"}>
+          <img
+            src={`/images/house${imageNumber}.jpeg`}
+            alt="Menu Image"
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </CardMedia>
+        <div className={"w-3/5 h-[80%] pl-[5%] flex flex-col justify-between"}>
+          <div>
+            <Typography className="font-satoshi-medium text-base text-black uppercase font-semibold">
+              {name}
+            </Typography>
+            <Typography className="font-satoshi-medium text-xs text-gray-500">
+              {size}m2
+            </Typography>
+          </div>
+          <div>
+            <Typography className="font-satoshi-medium text-xs text-gray-500">
+              ${kFormatter(price)}
+            </Typography>
+            <Typography className="font-satoshi-medium text-xs text-gray-500">
+              {propertyUse}
+            </Typography>
+          </div>
+          <div>
+            <Typography className="font-satoshi-medium text-xs text-gray-500">
+              {location}
+            </Typography>
+          </div>
+          <div>
+            <Typography className="font-satoshi-medium text-xs text-gray-500">
+              Ready to move: {readyToMove == true ? "Yes" : "No"}
+            </Typography>
+          </div>
         </div>
-        <div>
-          <Typography className="font-satoshi-medium text-xs text-gray-500">
-            2 bds - 3 ba
-          </Typography>
-          <Typography className="font-satoshi-medium text-xs text-gray-500">
-            1450 sq. ft.
-          </Typography>
-        </div>
-        <div>
-          <Typography className="font-satoshi-medium text-xs text-gray-500">
-            7453 Middlefield RD
-          </Typography>
-          <Typography className="font-satoshi-medium text-xs text-gray-500">
-            West Menlo Park - New York
-          </Typography>
-        </div>
-        <div>
-          <Typography className="font-satoshi-medium text-xs text-gray-500">
-            Ready to move
-          </Typography>
-          <Typography className="font-satoshi-medium text-sm font-semibold text-black cursor-pointer">
-            See more
-          </Typography>
-        </div>
-      </div>
-    </Box>
+      </CardActionArea>
+    </Card>
   );
 }
 
