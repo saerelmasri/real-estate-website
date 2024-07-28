@@ -134,6 +134,7 @@ function DiscoverSection() {
       }
     };
   }, []);
+
   return (
     <div
       className={`w-full h-[90vh] bg-hero bg-cover bg-no-repeat bg-center flex flex-col justify-center relative`}

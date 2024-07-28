@@ -1,8 +1,22 @@
+/* eslint-disable react/display-name */
 /* eslint-disable react/jsx-key */
 import { fetchData } from "@/tools/api";
-import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { styled } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+  memo,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 import { kFormatter } from "./Home/GridListing";
 import { FiltersTypes, SelectComponentProp } from "@/types";
 
@@ -11,7 +25,7 @@ const StyledSelect = styled(Select)(({ theme }) => ({
     borderColor: theme.palette.primary.main,
     borderRadius: 0,
     "&:focus": {
-      backgroundColor: "transparent", // Make background transparent when focused
+      backgroundColor: "transparent",
     },
   },
   "& .MuiSelect-icon": {
@@ -21,24 +35,37 @@ const StyledSelect = styled(Select)(({ theme }) => ({
   },
 }));
 
-function SelectComponent({
+const SelectComponent = ({
   title,
   filter,
   value,
   onChange,
-}: SelectComponentProp) {
+}: SelectComponentProp) => {
   const [open, setOpen] = useState(false);
   const [filters, setFilters] = useState<FiltersTypes>({ dataArray: [] });
+  const fetchedFilters = useRef<FiltersTypes>({ dataArray: [] });
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    const newValue = event.target.value as string | number;
-    onChange(filter, newValue);
-  };
+  const handleChange = useCallback(
+    (event: SelectChangeEvent<unknown>) => {
+      const newValue = event.target.value as string | number;
+      onChange(filter, newValue);
+    },
+    [filter, onChange]
+  );
+
   useEffect(() => {
     const fetchFilters = async () => {
       try {
         const response = await fetchData(`/api/property/filters/${filter}`);
-        setFilters({ dataArray: Array.from(new Set(response.dataArray)) }); // Ensure unique values
+        const newFilters: FiltersTypes = {
+          dataArray: Array.from(new Set(response.dataArray)),
+        };
+        if (
+          JSON.stringify(newFilters) !== JSON.stringify(fetchedFilters.current)
+        ) {
+          fetchedFilters.current = newFilters;
+          setFilters(newFilters);
+        }
       } catch (error) {
         console.error("Error fetching data");
       }
@@ -46,6 +73,8 @@ function SelectComponent({
 
     fetchFilters();
   }, [filter]);
+
+  const memorizedFilters = useMemo(() => filters.dataArray, [filters]);
 
   return (
     <FormControl
@@ -57,8 +86,8 @@ function SelectComponent({
         onChange={handleChange}
         open={open}
         value={value}
-        onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
+        onClose={useCallback(() => setOpen(false), [])}
+        onOpen={useCallback(() => setOpen(true), [])}
         MenuProps={{
           PaperProps: {
             sx: {
@@ -71,7 +100,7 @@ function SelectComponent({
           id: "uncontrolled-native",
         }}
       >
-        {filters.dataArray.map((item, index) => (
+        {memorizedFilters.map((item, index) => (
           <MenuItem key={`${item}-${index}`} value={item}>
             {filter === "price" && typeof item === "number"
               ? kFormatter(item)
@@ -87,6 +116,6 @@ function SelectComponent({
       </FormHelperText>
     </FormControl>
   );
-}
+};
 
-export default SelectComponent;
+export default memo(SelectComponent);
