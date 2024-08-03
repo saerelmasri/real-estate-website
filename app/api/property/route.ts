@@ -50,16 +50,12 @@ export const POST = async (req: Request) => {
 
 export const GET = async () => {
     try {
-        const result = await prisma.properties.findMany({
-            include: {
-                detail: true
-            }
-        });
+        const result = await prisma.properties.findMany();
         return NextResponse.json({ data: result }, { status: 201 });
     } catch (error) {
         console.error('Error creating property:', error);
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            return NextResponse.json({ error: 'Database error' }, { status: 500 });
+            return NextResponse.json({ error: error }, { status: 500 });
         }
 
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

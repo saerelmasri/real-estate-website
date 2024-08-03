@@ -18,8 +18,7 @@ export const GET = async (
 
         const result = await prisma.properties.findFirst({
             where: {
-                id: parseInt(propertyId[0], 10),
-                // id: propertyId
+                id: propertyId,
             },
             include: {
                 detail: true,

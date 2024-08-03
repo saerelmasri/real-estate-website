@@ -16,10 +16,12 @@ function TeamCard({ imageURL, name, position }: TeamCardProps) {
         paddingTop: 2,
         boxShadow: "none",
         borderRadius: 0,
+        width: "600px",
+        height: "700px",
       }}
     >
       <CardMedia
-        className={"h-[400px] bg-top bg-no-repea"}
+        className={"h-[600px] w-[550px] bg-top bg-no-repea"}
         image={`/images/${imageURL}`}
         title="business person"
       />

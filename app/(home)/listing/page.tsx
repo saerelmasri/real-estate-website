@@ -2,11 +2,11 @@
 
 import ListingComponent from "@/components/ListingComponent";
 import { fetchData } from "@/tools/api";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Skeleton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 type Property = {
-  id: number;
+  id: string;
   name: string;
   price: number;
   size: number;
@@ -16,9 +16,10 @@ type Property = {
 };
 
 function Contact() {
+  const [isLoading, setIsLoading] = useState(false);
   const [properties, setProperties] = useState<Property[]>([
     {
-      id: 0,
+      id: "",
       name: "",
       price: 0,
       size: 0,
@@ -31,12 +32,15 @@ function Contact() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
+        setIsLoading(true);
         const response = await fetchData("/api/property");
         if (response && response.data) {
           setProperties(response.data);
         }
       } catch (error) {
         console.error("Error fetching properties:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -65,18 +69,28 @@ function Contact() {
           gap={3}
           className="w-full pl-[10%] pt-[5%] pb-[5%]"
         >
-          {properties.map((item, index) => (
-            <Grid item md={3.5} key={index}>
-              <ListingComponent
-                propertyId={item.id}
-                propertyTitle={item.name}
-                propertyPrice={item.price}
-                propertyLocation={item.location}
-                propertySquare={String(item.size)}
-                imageNumber={item.imageNumber}
-              />
+          {isLoading ? (
+            <Grid item xs={12}>
+              <Skeleton width={"700px"} height={"800px"} />
             </Grid>
-          ))}
+          ) : properties.length > 0 ? (
+            properties.map((item) => (
+              <Grid item sm={12} md={12} lg={5} xl={3.5} key={item.id}>
+                <ListingComponent
+                  propertyId={item.id}
+                  propertyTitle={item.name}
+                  propertyPrice={item.price}
+                  propertyLocation={item.location}
+                  propertySquare={String(item.size)}
+                  imageNumber={item.imageNumber}
+                />
+              </Grid>
+            ))
+          ) : (
+            <Grid item xs={12}>
+              <p>No properties available</p>
+            </Grid>
+          )}
         </Grid>
       </div>
     </div>

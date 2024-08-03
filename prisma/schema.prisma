@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Properties {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(uuid())
   name        String
   propertyUse String
   price       Int
@@ -24,9 +24,9 @@ model Properties {
 }
 
 model Details {
-  id           Int         @id @default(autoincrement())
+  id           String     @id @default(uuid())
   detail       String
   quantity     Int?
-  propertiesId Int?
-  Properties   Properties? @relation(fields: [propertiesId], references: [id])
+  propertiesId String
+  Properties   Properties @relation(fields: [propertiesId], references: [id])
 }

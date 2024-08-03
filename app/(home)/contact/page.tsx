@@ -77,8 +77,10 @@ function Contact() {
               34 West Menlo — SF, CA
             </Typography>
             <Typography className="text-3xl md:text-4xl font-medium leading-snug">
-              Lorem ipsum dolor sit amet tellus consectetur. Non ut sem tellus
-              velit tempus curabitur integer duis maecenas. Massa eu tincidunt
+              Thank you for visiting us! We appreciate your interest and would
+              love to hear from you. Feel free to visit us at our office, give
+              us a call, or send us an email with any questions or inquiries. We
+              look forward to connecting with you!
             </Typography>
           </div>
           <div className="w-full md:w-1/2 flex flex-col justify-center items-start text-white p-[10%] md:p-[10%] gap-5 md:gap-10">

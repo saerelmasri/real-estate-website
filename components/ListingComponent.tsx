@@ -13,7 +13,7 @@ import { kFormatter } from "./Home/GridListing";
 import { useRouter } from "next/navigation";
 
 type ListingProps = {
-  propertyId: number;
+  propertyId: string;
   imageNumber: number;
   propertyTitle: string;
   propertyPrice: number;

@@ -102,7 +102,9 @@ function DiscoverSection() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetchData(`/api/property/8`);
+        const response = await fetchData(
+          `/api/property/bb88c2ef-d628-4879-86a1-d938145ecec5`
+        );
         if (response && response.data) {
           setProperty(response.data);
         }

@@ -23,7 +23,8 @@
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.4",
     "react-use": "^17.5.0",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/google-map-react": "^2.1.10",

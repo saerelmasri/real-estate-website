@@ -64,10 +64,10 @@ function NavBar() {
   return (
     <>
       <nav
-        className={` w-full p-3 ${menuOpen === true ? "bg-black" : ""}`}
+        className={` w-full p-3 ${menuOpen === true ? "bg-black" : ""} `}
         style={{
           zIndex: 1100,
-          position: "absolute",
+          position: "fixed",
           top: 0,
           left: 0,
           right: 0,
@@ -262,18 +262,6 @@ function NavBar() {
               }}
             />
           </Box>
-        </Box>
-        <Box
-          className={
-            "w-full items-center justify-between pl-[10%] pr-[10%] pb-9 hidden lg:flex"
-          }
-        >
-          <Typography className={"text-sm font-bold"} color={"primary"}>
-            © Habitat — All rights reserved
-          </Typography>
-          <Typography className={"text-xs font-bold"} color={"primary"}>
-            Made By Saer El Masri
-          </Typography>
         </Box>
       </Box>
     </>
