@@ -17,10 +17,10 @@ type MapCoordinates = {
 };
 
 const MapComponent = ({ longitude, latitude }: MapCoordinates) => {
-  const mapElement = useRef(null);
+  const mapElement = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!longitude || !latitude) return;
+    if (!longitude || !latitude || !mapElement.current) return;
 
     const iconFeature = new Feature({
       geometry: new Point(fromLonLat([longitude, latitude])),
@@ -60,7 +60,7 @@ const MapComponent = ({ longitude, latitude }: MapCoordinates) => {
     });
 
     return () => {
-      map.setTarget(null);
+      map.setTarget(undefined);
     };
   }, [longitude, latitude]);
 
