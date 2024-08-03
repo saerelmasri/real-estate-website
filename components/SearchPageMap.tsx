@@ -30,11 +30,11 @@ type SearchPageMapProps = {
 };
 
 function SearchPageMap({ properties, hoveredProperty }: SearchPageMapProps) {
-  const mapElement = useRef(null);
+  const mapElement = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map | null>(null);
 
   useEffect(() => {
-    if (!properties || properties.length === 0) return;
+    if (!mapElement.current || properties.length === 0) return;
 
     const features = properties.map((property) => {
       const iconFeature = new Feature({
@@ -82,7 +82,7 @@ function SearchPageMap({ properties, hoveredProperty }: SearchPageMapProps) {
 
     // Clean up on unmount
     return () => {
-      map.setTarget(null);
+      map.setTarget(undefined);
     };
   }, [properties]);
 
