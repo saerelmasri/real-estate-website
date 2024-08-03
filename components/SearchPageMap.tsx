@@ -82,24 +82,20 @@ function SearchPageMap({ properties, hoveredProperty }: SearchPageMapProps) {
 
     // Clean up on unmount
     return () => {
-      map.setTarget(undefined);
+      if (mapRef.current) {
+        mapRef.current.setTarget(undefined);
+      }
     };
   }, [properties]);
 
   useEffect(() => {
-    if (mapRef.current && hoveredProperty) {
+    if (mapRef.current) {
       const view = mapRef.current.getView();
       view.animate({
         center: fromLonLat([
-          hoveredProperty.longitude,
-          hoveredProperty.latitude,
+          hoveredProperty?.longitude ?? properties[0].longitude,
+          hoveredProperty?.latitude ?? properties[0].latitude,
         ]),
-        duration: 500,
-      });
-    } else if (mapRef.current && properties.length > 0) {
-      const view = mapRef.current.getView();
-      view.animate({
-        center: fromLonLat([properties[0].longitude, properties[0].latitude]),
         duration: 500,
       });
     }
